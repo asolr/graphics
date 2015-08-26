@@ -11,9 +11,12 @@ document.addEventListener("DOMContentLoaded", function(event){demo()});
 function demo (){
   var canvas = document.getElementById("example");
   var draw = new Canvas(canvas);
-  points = [[50,50],[100,10]];
+  var points = [[100,50],[10,50],[10,200]]
+  for (var i = 0; i < 10; i++) {
+    points.push([Math.random()*700,Math.random()*700]);
+  }
   //draw.scale(points);
-  draw.circle(points, 5);
+  draw.circle(points, Math.random()*400);
 }
 
 </script>

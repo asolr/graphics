@@ -31,6 +31,7 @@ Canvas() : Image code for drawing a .PNG in HTML
 function Canvas(canvas) {
 	if (canvas == undefined) {
 		this.canvas = document.createElement("canvas");
+		// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
 		this.context = this.canvas.getContext('2d');
 		this.canvas.id = "";
 		// default values for canvas if (canvas = undefined)
@@ -38,13 +39,29 @@ function Canvas(canvas) {
 		for(var index in style) {
 			this.canvas[index] = style[index];
 		}
-		document.body.appendChild(this.canvas)
+		document.body.appendChild(this.canvas);
 	}
 	else { // predefined canvas
 		this.canvas = canvas;
-		this.context = this.canvas.getContext('2d'); // make sure that the context is 2d (bug)
+		this.context = this.canvas.getContext('2d');
 	}
 	this.canvas.addEventListener("click", this.click.bind(this), false);
+}
+
+// draw any image to the canvas
+Canvas.prototype.drawImage = function(image) {
+	this.context.drawImage(image, 0,0);
+}
+
+Canvas.prototype.getImageData = function() {
+	this.canvas.data = this.context.getImageData(0,0,this.canvas.width,this.canvas.height);
+	return this.canvas.data;
+}
+
+Canvas.prototype.putImageData = function(data) {
+	// var idata = this.context.getImageData(0,0,width,height);
+	// idata.data = data;
+	this.context.putImageData(data, 0, 0);
 }
 
 /*

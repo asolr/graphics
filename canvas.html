@@ -9,8 +9,7 @@
 
 document.addEventListener("DOMContentLoaded", function(event){demo()});
 function demo (){
-  var canvas = document.getElementById("example");
-  var draw = new Canvas(canvas);
+  var draw = new Canvas(document.getElementById("example"));
   var points = [[100,50],[10,50],[10,200]]
   for (var i = 0; i < 10; i++) {
     points.push([Math.random()*700,Math.random()*700]);

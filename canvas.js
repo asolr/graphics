@@ -49,16 +49,24 @@ function Canvas(canvas) {
 }
 
 // draw any image to the canvas
-Canvas.prototype.drawImage = function(image) {
+Canvas.prototype.drawImage = function(image)
+{
 	this.context.drawImage(image, 0,0);
 }
 
-Canvas.prototype.getImageData = function() {
+Canvas.prototype.getImageData = function()
+{
 	this.canvas.data = this.context.getImageData(0,0,this.canvas.width,this.canvas.height);
 	return this.canvas.data;
 }
 
-Canvas.prototype.putImageData = function(data) {
+Canvas.prototype.createImageData = function(width, height)
+{
+	this.context.createImageData(width, height);
+}
+
+Canvas.prototype.putImageData = function(data)
+{
 	// var idata = this.context.getImageData(0,0,width,height);
 	// idata.data = data;
 	this.context.putImageData(data, 0, 0);
@@ -310,4 +318,15 @@ Canvas.prototype.randcolor = function () {
 	var color = "rgba(" + red + ", " + green + ", " + blue + ", 1)";
 	//var color = Math.round(Math.random()*(0xFFFFFF)).toString(16);
 	return color;
+}
+
+Canvas.prototype.plot = function(data) {
+	// Draw background graphic grid
+	this.context.fillStyle = '#131';
+	this.context.fillRect(0, Math.round(this.canvas.height/2), this.canvas.width, 1);
+	this.context.fillStyle = 'hsl(127,83%,66%)'; // green #60f070
+	for(var i = 0; i < data.length; i++)
+	{
+		this.context.fillRect(data[i][0], data[i][1], 1, 1);
+	}
 }
